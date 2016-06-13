@@ -462,6 +462,6 @@ function inRoom(player){
 
 
 http.listen(process.env.PORT ||5000,function(){
-   console.log('listenning on port 3000');
+   console.log('listenning on port 5000');
 
 });
