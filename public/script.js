@@ -34,6 +34,12 @@ alert('already taken try again');
 });
 
 
+socket.on('invalidname',function(){
+alert('invalid try again');
+    socket.emit('newPlayer',prompt('enter a username'));
+});
+
+
     socket.on('roomfull',function(){
         alert('room is full choose another room to join');
 

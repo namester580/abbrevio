@@ -7,14 +7,7 @@ var http = require('http').Server(app);
 //var $ = require('jquery');
 var io = require('socket.io')(http);
 
-var players = [{
-    name:'name' ,
-    guess:'',
-    score: 0,
-    room:'lobby'
-
-
-}];
+var players = [];
 var clients=0;
 var rooms = [{
     name: 'lobby',
@@ -87,6 +80,7 @@ socket.on('newPlayer',function(name){
     //socket.room = 'lobby';
     //socket.join('lobby');
     //create player obj
+if(name!=''){
     if(!nameExists(name)){
         addPlayer(name,'lobby');
         socket.name = name;
@@ -109,8 +103,12 @@ socket.on('newPlayer',function(name){
 console.log('error nametaken');
 
     }
+}//----------------
+else{
+socket.emit('invalidname');
 
 
+}
 
 
 
