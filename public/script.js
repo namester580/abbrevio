@@ -28,6 +28,19 @@ $(document).ready(function(){
 
     });
 
+socket.on('nametaken',function(){
+alert('already taken try again');
+    socket.emit('newPlayer',prompt('enter a username'));
+});
+
+
+    socket.on('roomfull',function(){
+        alert('room is full choose another room to join');
+
+    });
+
+
+
 //.. global
     socket.on('endGame',function(winner){
 
@@ -177,7 +190,7 @@ $(document).ready(function(){
                 voted = false;
             }
 
-
+$('#m').focus();
 
         });
 
