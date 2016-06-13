@@ -3,7 +3,7 @@
  */
 $(document).ready(function(){
   //  $('#rooms').hide("slide", { direction: "left" }, 1000);
-alert('');
+
  //   $('#rooms').animate({width: 0});
   //  $('#rooms').hide();
   //  $('#rooms').slideDown(1000);
