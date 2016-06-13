@@ -70,10 +70,13 @@ alert('invalid try again');
 
 
             var guess = $('#m').val();
+if(guess!=''){
             socket.emit('guess', guess);
             $('#m').val('');
             guessed = true;
-
+}else{
+ alert('Can't be empty!');
+}
 
         } else
         {
