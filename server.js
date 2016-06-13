@@ -13,7 +13,7 @@ var rooms = [{
     name: 'lobby',
     abbrevio:'ABBREVIO',
     maxPlayers:50,
-    players:1
+    players:0
 
 
 
@@ -41,7 +41,7 @@ var rooms = [{
     },{
         name:'smallroom',
         abbrevio:'',
-        maxPlayers:1,
+        maxPlayers:8,
         players:0
 
 
