@@ -103,7 +103,8 @@ if(guess!=''){
 //$('h1').innerHTML(acro);
 
     socket.on('chat',function(msg,plr){
-         $('#players li').remove();
+        guessed = false;
+  $('#players li').remove();
         //   $('#players').append('<li id =' + plr +'>' +  plr +':' + msg   + '</li>');
         $('#msgs').append('<li>' +  plr +':' + msg   + '</li>');
 
