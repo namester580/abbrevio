@@ -5,6 +5,25 @@
     "express": "^4.10.2",
     "jquery": "^2.2.3",
     "socket.io": "^1.4.5"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "description": "",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/namester580/abbrevio.git"
+  },
+  "keywords": [
+    "node",
+    "socket"
+  ],
+  "author": "namester580",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/namester580/abbrevio/issues"
+  },
+  "homepage": "https://github.com/namester580/abbrevio#readme"
 }
-
