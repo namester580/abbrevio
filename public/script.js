@@ -75,7 +75,7 @@ if(guess!=''){
             $('#m').val('');
             guessed = true;
 }else{
- alert('Can't be empty!');
+ alert('Can not be empty!');
 }
 
         } else
