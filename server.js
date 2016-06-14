@@ -95,7 +95,13 @@ if(name!=''){
 
         });
 
-        io.sockets.in(socket.room).emit('rooms',rooms,getPlayersFor(socket.room),getAbbrevio(socket.room));
+        io.sockets.in(socket.room).emit('rooms',rooms);
+        io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+        io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+
+
+
+
         console.log('player: ' + name + ' joined the lobby' );
         io.sockets.in(socket.room).emit('chat',' just joined',socket.name);
     }else{
@@ -138,8 +144,13 @@ socket.on('room',function(room){
         }
     }
 
-    io.sockets.in(socket.room).emit('rooms',rooms,getPlayersFor(socket.room),getAbbrevio(socket.room));
-    console.log(rooms);
+
+    io.sockets.in(socket.room).emit('rooms',rooms);
+    io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+
+
+      console.log(rooms);
   //  console.log(players);
 });
 
@@ -158,10 +169,20 @@ socket.on('room',function(room){
 
         if(socket.room!='lobby') {
             guess(socket.name, gs);
-            io.sockets.in(socket.room).emit('rooms',rooms,getPlayersFor(socket.room),getAbbrevio(socket.room));
+
+            io.sockets.in(socket.room).emit('rooms',rooms);
+            io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+        //    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+
+
 
         }else{
-            io.sockets.in(socket.room).emit('rooms',rooms,getPlayersFor(socket.room),getAbbrevio(socket.room));
+
+            io.sockets.in(socket.room).emit('rooms',rooms);
+            io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+      //      io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+
+
 
             io.sockets.in(socket.room).emit('chat',gs,socket.name);
 
@@ -172,7 +193,15 @@ socket.on('room',function(room){
 socket.on('vote',function(player){
     vote(player);
     totalVotes = getScore(socket.room);
-    io.sockets.in(socket.room).emit('rooms',rooms,getPlayersFor(socket.room),getAbbrevio(socket.room));
+
+
+    io.sockets.in(socket.room).emit('rooms',rooms);
+    io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+
+
+
+
     if(totalVotes>=getPlayersFor(socket.room).length){
         endGame(socket.room);
     }
@@ -186,7 +215,11 @@ socket.on('disconnect',function(){
     io.sockets.in(socket.room).emit('chat',' just left',socket.name);
   socket.leave(socket.room);
     removePlayer(socket.name,socket.room);
-    io.sockets.in(socket.room).emit('rooms',rooms,getPlayersFor(socket.room),getAbbrevio(socket.room));
+    io.sockets.in(socket.room).emit('rooms',rooms);
+    io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+
+
 
 });
 
@@ -224,17 +257,7 @@ function clearPlayers(room){
 }
 
 
-function changeRoom(name,room){
-    for (var t in players)
-if(players[t].name == name){
-    players[t].room = room;
 
-
-}
-
-
-
-}
 
 
 
@@ -372,8 +395,9 @@ function startGame(room){
 
 
    }
-    io.sockets.in(room).emit('rooms',rooms,getPlayersFor(room),getAbbrevio(room));
-
+    io.sockets.in(room).emit('rooms',rooms);
+    io.sockets.in(room).emit('players',getPlayersFor(room));
+    io.sockets.in(room).emit('abbrevio',getAbbrevio(room));
     //   io.sockets.in(room).emit('abbrevio',abbrevio());
 
 
@@ -444,18 +468,6 @@ function removePlayer(player,room){
 }
 
 
-function inRoom(player){
-    var inroom = false;
-    for(var f in rooms){
-        for(var g in rooms[f].players){
-            if(rooms[f].players[g].name == player){
-                inroom = true;
-            }
-        }
-    }
-    return inroom;
-
-}
 
 
 

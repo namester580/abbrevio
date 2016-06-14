@@ -115,34 +115,10 @@ if(guess!=''){
 
 
 
-
-    socket.on('rooms',function(rooms,players,abbrevio) {
-        hAbbrevio.text(abbrevio);
-        if(abbrevio != 'ABBREVIO'){
-            $('#msgs li').remove();
-
-            //   alert('k');
-            //$('#rooms li').remove();
-            // $('#players li').remove();
-        }
-     //   $('#rooms li').remove();
+    socket.on('players',function(players){
         $('#players li').remove();
 
-        $('.room').remove();
-        //  alert(socket.id);
-        for (var a in rooms) {
-            //    alert(rooms[a].name);
-            // $('#rooms').append('<li><p>' + rooms[a].name +'</p><p>' + rooms[a].abbrevio + '</p><p>' + rooms[a].players.length + '</p><p>' + rooms[a].maxPlayers + '</p>' );
-            $('#rooms').append('<tr class = "room" id =' + rooms[a].name + '>' + '<td>' + rooms[a].name + '</td>' + '<td>' + rooms[a].abbrevio + '</td>' + '<td>' + rooms[a].players + '</td>' + '<td>' + rooms[a].maxPlayers + '</td>' + '</tr>');
-            //    $("#abbrevio").html(rooms[a].abbrevio);
 
-            makeClick(rooms[a].name);
-
-
-
-
-
-        }
 
         for(var e in players){
 
@@ -182,12 +158,47 @@ if(guess!=''){
 
 
         }
-        if(abbrevio == 'ABBREVIO'){
-            $('#players li').remove();
 
+
+
+
+
+
+    });
+    socket.on('abbrevio',function(abbrevio){
+        hAbbrevio.text(abbrevio);
+        if(abbrevio != 'ABBREVIO'){
+            $('#msgs li').remove();
+
+            //   alert('k');
+            //$('#rooms li').remove();
+            // $('#players li').remove();
+            if(abbrevio == 'ABBREVIO'){
+                $('#players li').remove();
+
+
+
+            }
+        }
+    });
+    socket.on('rooms',function(rooms) {
+
+     //   $('#rooms li').remove();
+
+
+        $('.room').remove();
+        //  alert(socket.id);
+        for (var a in rooms) {
+            //    alert(rooms[a].name);
+            // $('#rooms').append('<li><p>' + rooms[a].name +'</p><p>' + rooms[a].abbrevio + '</p><p>' + rooms[a].players.length + '</p><p>' + rooms[a].maxPlayers + '</p>' );
+            $('#rooms').append('<tr class = "room" id =' + rooms[a].name + '>' + '<td>' + rooms[a].name + '</td>' + '<td>' + rooms[a].abbrevio + '</td>' + '<td>' + rooms[a].players + '</td>' + '<td>' + rooms[a].maxPlayers + '</td>' + '</tr>');
+            //    $("#abbrevio").html(rooms[a].abbrevio);
+
+            makeClick(rooms[a].name);
 
 
         }
+
 
     });
     //to make the room elements clickable(workaround)
