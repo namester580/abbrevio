@@ -106,7 +106,7 @@ if(guess!=''){
         guessed = false;
   $('#players li').remove();
         //   $('#players').append('<li id =' + plr +'>' +  plr +':' + msg   + '</li>');
-        $('#msgs').append('<li>' +  plr +':' + msg   + '</li>');
+        $('#msgs').prepend('<li>' +  plr +':' + msg   + '</li>');
 
         guessed = false;
 
