@@ -66,7 +66,7 @@ alert('invalid try again');
         // socket.emit('guess', $('#m').val());
         // if(socket.room!='lobby'){
         //  alert(socket.room);
-        if (guessed == false ) {
+        if (guessed == false||socket.room =='lobby' ) {
 
 
             var guess = $('#m').val();
@@ -118,12 +118,8 @@ if(guess!=''){
     socket.on('players',function(players){
         $('#players li').remove();
 
-var inLobby;
-if(players[0].room == 'lobby'){
-    inLobby = true;
-}else{
-    inLobby = false;
-}
+
+
         for(var e in players){
 
             $('#players').append('<li id =' + players[e].name +'>' +  players[e].name +':' +  players[e].guess + '<span class = "score">' + players[e].score   + '</span></li>');
@@ -141,10 +137,7 @@ if(players[0].room == 'lobby'){
 
                             voted = true;
                         }else{
-if(!inLobby) {
-    alert('already voted');
-
-}
+                            alert('already voted');
                         }
 
 
