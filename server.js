@@ -69,6 +69,10 @@ startGame('smallroom');
 
 io.on('connect',function(socket){
 console.log("client connected:");
+    if(!socket.room){
+        socket.room = 'lobby';
+        socket.join(socket.room);
+    }
 //socket.room = 'lobby';
 //    io.emit('rooms',rooms);
    io.sockets.in(socket.room).emit('rooms',rooms);
@@ -141,7 +145,7 @@ socket.on('room',function(room){
             addPlayer(socket.name, socket.room);
             //   changeRoom(socket.name,socket.room);
             socket.join(socket.room);
-
+            io.sockets.in(socket.room).emit('chat',' just joined',socket.name);
 
         }else{
             socket.emit('roomfull');

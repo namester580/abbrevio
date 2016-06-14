@@ -3,7 +3,7 @@
  */
 $(document).ready(function(){
   //  $('#rooms').hide("slide", { direction: "left" }, 1000);
-
+    var hAbbrevio = $('#abbrevio');
  //   $('#rooms').animate({width: 0});
   //  $('#rooms').hide();
   //  $('#rooms').slideDown(1000);
@@ -25,6 +25,7 @@ $(document).ready(function(){
         guessed = false;
         socket.emit('newPlayer',prompt('enter a username'));
 //guessed = false;
+        $('#m').focus();
 
     });
 
@@ -80,7 +81,8 @@ if(guess!=''){
 
         } else
         {
-          //  alert('already guessed');
+            $('#m').val('');
+           // alert('already guessed');
         }
 
 
@@ -95,7 +97,7 @@ if(guess!=''){
 
 //--------------------------------------------------------------socket.emit('nawPlayer','marco');
 
-    var hAbbrevio = $('h1');
+
 
 //document.write('<h1 style="text-align: center">' + acro + '<h1>');
     //   $('li').remove();
@@ -103,14 +105,14 @@ if(guess!=''){
 //$('h1').innerHTML(acro);
 
     socket.on('chat',function(msg,plr){
-        guessed = false;
+      //  guessed = false;
   $('#players li').remove();
         //   $('#players').append('<li id =' + plr +'>' +  plr +':' + msg   + '</li>');
         $('#msgs').prepend('<li>' +  plr +':' + msg   + '</li>');
 
         guessed = false;
 
-
+        $('#m').focus();
     });
 
 
