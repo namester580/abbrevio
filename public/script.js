@@ -118,8 +118,12 @@ if(guess!=''){
     socket.on('players',function(players){
         $('#players li').remove();
 
-
-
+var inLobby;
+if(players[0].room == 'lobby'){
+    inLobby = true;
+}else{
+    inLobby = false;
+}
         for(var e in players){
 
             $('#players').append('<li id =' + players[e].name +'>' +  players[e].name +':' +  players[e].guess + '<span class = "score">' + players[e].score   + '</span></li>');
@@ -137,7 +141,10 @@ if(guess!=''){
 
                             voted = true;
                         }else{
-                            alert('already voted');
+if(!inLobby) {
+    alert('already voted');
+
+}
                         }
 
 
