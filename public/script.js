@@ -66,7 +66,7 @@ alert('invalid try again');
         // socket.emit('guess', $('#m').val());
         // if(socket.room!='lobby'){
         //  alert(socket.room);
-        if (guessed == false||socket.room =='lobby' ) {
+        if (guessed == false ) {
 
 
             var guess = $('#m').val();
@@ -80,7 +80,7 @@ if(guess!=''){
 
         } else
         {
-            alert('already guessed');
+          //  alert('already guessed');
         }
 
 
