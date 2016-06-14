@@ -173,12 +173,13 @@ if(guess!=''){
             //   alert('k');
             //$('#rooms li').remove();
             // $('#players li').remove();
-            if(abbrevio == 'ABBREVIO'){
-                $('#players li').remove();
+
+        }
+        if(abbrevio == 'ABBREVIO'){
+            $('#players li').remove();
 
 
 
-            }
         }
     });
     socket.on('rooms',function(rooms) {

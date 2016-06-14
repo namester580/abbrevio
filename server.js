@@ -71,8 +71,13 @@ io.on('connect',function(socket){
 console.log("client connected:");
 //socket.room = 'lobby';
 //    io.emit('rooms',rooms);
-   io.sockets.in(socket.room).emit('rooms',rooms,getPlayersFor(socket.room),getAbbrevio(socket.room));
-socket.on('newPlayer',function(name){
+   io.sockets.in(socket.room).emit('rooms',rooms);
+    io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+
+
+
+    socket.on('newPlayer',function(name){
    //assign to socket
  //   rooms[0].players++;
  //  addPlayer(name,'lobby');
@@ -146,8 +151,10 @@ socket.on('room',function(room){
 
 
     io.sockets.in(socket.room).emit('rooms',rooms);
-    io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
-    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+    if(room!="lobby") {
+        io.sockets.in(socket.room).emit('players', getPlayersFor(socket.room));
+    }
+        io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
 
 
       console.log(rooms);
@@ -172,7 +179,7 @@ socket.on('room',function(room){
 
             io.sockets.in(socket.room).emit('rooms',rooms);
             io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
-        //    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+            io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
 
 
 
@@ -180,7 +187,7 @@ socket.on('room',function(room){
 
             io.sockets.in(socket.room).emit('rooms',rooms);
             io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
-      //      io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+            io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
 
 
 
