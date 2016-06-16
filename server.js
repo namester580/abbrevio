@@ -83,6 +83,27 @@ io.on('connect',function(socket){
 
 
 
+    socket.on('disconnect',function(){
+        console.log(socket.id + "disconnected");
+        io.sockets.in(socket.room).emit('chat',' just left',socket.name);
+        socket.leave(socket.room);
+        removePlayer(socket.name,socket.room);
+        io.sockets.in(socket.room).emit('rooms',rooms);
+        io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+        io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+
+
+
+    });
+
+
+});
+
+
+
+io.on('connect',function(socket){
+
+
     socket.on('newPlayer',function(name){
         //assign to socket
         //   rooms[0].players++;
@@ -193,19 +214,6 @@ socket.on('room',function(room){
 
 
 
-
-socket.on('disconnect',function(){
-    console.log(socket.id + "disconnected");
-    io.sockets.in(socket.room).emit('chat',' just left',socket.name);
-  socket.leave(socket.room);
-    removePlayer(socket.name,socket.room);
-    io.sockets.in(socket.room).emit('rooms',rooms);
-    io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
-    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
-
-
-
-});
 
 
 
