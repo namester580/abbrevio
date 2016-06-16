@@ -133,6 +133,7 @@ if(guess!=''){
 
 
                     function() {
+                        $('#m').focus();
                         //   alert( players[e].name);
                         if(voted==false) {
                             vote(players[e].name);
