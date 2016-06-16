@@ -67,69 +67,82 @@ startGame('someRoom');  //----------------------------------------------------
 startGame('smallroom');
 
 
+
+
 io.on('connect',function(socket){
-console.log("client connected:");
+    console.log("client connected:");
     if(!socket.room){
         socket.room = 'lobby';
         socket.join(socket.room);
     }
 //socket.room = 'lobby';
 //    io.emit('rooms',rooms);
-   io.sockets.in(socket.room).emit('rooms',rooms);
+    io.sockets.in(socket.room).emit('rooms',rooms);
     io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
     io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
 
 
 
     socket.on('newPlayer',function(name){
-   //assign to socket
- //   rooms[0].players++;
- //  addPlayer(name,'lobby');
-  //  socket.name = name;
-    //socket.room = 'lobby';
-    //socket.join('lobby');
-    //create player obj
-if(name!=''){
-    if(!nameExists(name)){
-        addPlayer(name,'lobby');
-        socket.name = name;
-        socket.room = 'lobby';
-        socket.join('lobby');
-        players.push({
-            name: name,
-            score: 0,
-            guess: '',
-            room: 'lobby'
+        //assign to socket
+        //   rooms[0].players++;
+        //  addPlayer(name,'lobby');
+        //  socket.name = name;
+        //socket.room = 'lobby';
+        //socket.join('lobby');
+        //create player obj
+        if(name!=''){
+            if(!nameExists(name)){
+                addPlayer(name,'lobby');
+                socket.name = name;
+                socket.room = 'lobby';
+                socket.join('lobby');
+                players.push({
+                    name: name,
+                    score: 0,
+                    guess: '',
+                    room: 'lobby'
 
 
-        });
+                });
 
-        io.sockets.in(socket.room).emit('rooms',rooms);
-        io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
-        io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
-
-
-
-
-        console.log('player: ' + name + ' joined the lobby' );
-        io.sockets.in(socket.room).emit('chat',' just joined',socket.name);
-    }else{
-      socket.emit('nametaken');
-console.log('error nametaken');
-
-    }
-}//----------------
-else{
-socket.emit('invalidname');
-
-
-}
+                io.sockets.in(socket.room).emit('rooms',rooms);
+                io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+                io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
 
 
 
 
- //   console.log(getPlayersFor(socket.room));
+                console.log('player: ' + name + ' joined the lobby' );
+                io.sockets.in(socket.room).emit('chat',' just joined',socket.name);
+            }else{
+                socket.emit('nametaken');
+                console.log('error nametaken');
+
+            }
+        }//----------------
+        else{
+            socket.emit('invalidname');
+
+
+        }
+
+
+
+
+        //   console.log(getPlayersFor(socket.room));
+    });
+
+
+
+
+
 });
+
+
+
+io.on('connect',function(socket){
+
 
 socket.on('room',function(room){
     if(socket.room != room){
@@ -176,6 +189,33 @@ socket.on('room',function(room){
   //  }
 
 
+
+
+
+
+
+socket.on('disconnect',function(){
+    console.log(socket.id + "disconnected");
+    io.sockets.in(socket.room).emit('chat',' just left',socket.name);
+  socket.leave(socket.room);
+    removePlayer(socket.name,socket.room);
+    io.sockets.in(socket.room).emit('rooms',rooms);
+    io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+
+
+
+});
+
+
+
+
+
+    });
+
+
+io.on('connect',function(socket){
+
     socket.on('guess',function(gs){
 
         if(socket.room!='lobby') {
@@ -201,44 +241,35 @@ socket.on('room',function(room){
 
 
     });
-socket.on('vote',function(player){
-    vote(player);
-    totalVotes = getScore(socket.room);
-
-
-    io.sockets.in(socket.room).emit('rooms',rooms);
-    io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
-    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
-
-
-
-
-    if(totalVotes>=getPlayersFor(socket.room).length){
-        endGame(socket.room);
-    }
-
-});
-
-
-
-socket.on('disconnect',function(){
-    console.log(socket.id + "disconnected");
-    io.sockets.in(socket.room).emit('chat',' just left',socket.name);
-  socket.leave(socket.room);
-    removePlayer(socket.name,socket.room);
-    io.sockets.in(socket.room).emit('rooms',rooms);
-    io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
-    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
 
 
 
 });
 
+io.on('connect',function(socket){
+    socket.on('vote',function(player){
+        vote(player);
+        totalVotes = getScore(socket.room);
+
+
+        io.sockets.in(socket.room).emit('rooms',rooms);
+        io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+        io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
 
 
 
+
+        if(totalVotes>=getPlayersFor(socket.room).length){
+            endGame(socket.room);
+        }
 
     });
+
+});
+
+
+
+
 
 
 function clearPlayer(name){
