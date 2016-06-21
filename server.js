@@ -195,7 +195,7 @@ socket.on('room',function(room){
         io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
 
 
-      console.log(rooms);
+    //  console.log(rooms);
   //  console.log(players);
 });
 
