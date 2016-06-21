@@ -116,8 +116,9 @@ io.on('connect',function(socket){
             if(!nameExists(name)){
                 addPlayer(name,'lobby');
                 socket.name = name;
-                socket.room = 'lobby';
-                socket.join('lobby');
+                
+//addPlayer(socket.name, socket.room);
+               // socket.join('lobby');
                 players.push({
                     name: name,
                     score: 0,
@@ -126,6 +127,7 @@ io.on('connect',function(socket){
 
 
                 });
+//addPlayer(socket.name, socket.room);
 
                 io.sockets.in(socket.room).emit('rooms',rooms);
                 io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
