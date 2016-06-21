@@ -23,7 +23,7 @@
 
 #msgs
 {
-    border: 2px blueviolet solid;
+    
     font-size: 12px;
 }
 
@@ -45,7 +45,7 @@
 
 #rooms 
 {
-    border: white 2px solid;
+    border: black 2px solid;
     border-radius: 5px;
     background: rgba(245,245,245,0.7);
     width:30%;
@@ -85,16 +85,13 @@ h1
 html
 {
     height: 100%;
-    background-image: url(Images/mix.jpg);
-    background-repeat: no-repeat;
-    background-size:cover;
-    background-attachment: fixed;
+ 
     
 }
 
 * 
 { 
-    font-family: DarkCrysrtalFull;
+ 
     margin: 0;
     padding: 0;
     box-sizing: border-box; 
