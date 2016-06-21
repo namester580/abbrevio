@@ -7,17 +7,9 @@
 }
 #msgs li { padding: 5px 10px; }
 #msgs li:nth-child(odd) { background: #eee; }
-@font-face
-{
-    font-family: DarkCrysrtalOut;
-    src: url(Fonts/darkcrystaloutline.ttf);
-}
 
-@font-face
-{
-    font-family: DarkCrysrtalFull;
-    src: url(Fonts/darkcrystalscript.ttf);
-}
+
+
 
 #msgs
 {
@@ -28,15 +20,6 @@
     width:70%;
 }
 
-header
-{
-    background-image: url(Images/AbbrevioTwo.gif);
-    background-repeat: no-repeat;
-    background-position: left;
-    padding: 30px;
-    padding-left: 50px;
-    background-color: rgba(245,245,245,0.7);
-}
 
 #msgs
 {
@@ -167,10 +150,7 @@ form button
 }
 
 
-#pmSection
-{
-    border: 2px blueviolet solid;
-}
+
 
 footer
 {
