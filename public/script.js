@@ -132,11 +132,11 @@ if(guess!=''){
                 $('#' + players[e].name).click(
 
 
-                    function() {
+                    function(event) {
                         $('#m').focus();
                         //   alert( players[e].name);
                         if(voted==false) {
-                            vote(players[e].name);
+                            vote(event.target.id);
 
                             voted = true;
                         }else{

@@ -85,6 +85,7 @@ io.on('connect',function(socket){
 
     socket.on('disconnect',function(){
         console.log(socket.id + "disconnected");
+       if(socket.room== 'lobby')
         io.sockets.in(socket.room).emit('chat',' just left',socket.name);
         socket.leave(socket.room);
         removePlayer(socket.name,socket.room);
