@@ -5,6 +5,12 @@ $(document).ready(function(){
   //  $('#rooms').hide("slide", { direction: "left" }, 1000);
     var hAbbrevio = $('#abbrevio');
  //   $('#rooms').animate({width: 0});
+    $('#abbrevio').click(function(){
+        alert('This game is currently best played on pc.. the goal is to come up with full terms for randomly generated abbreviations, be as creative as possible... when in lobby type to send messages.   when in any other room type to guess the abbreviation on top.. you can vote for other players or your own guess\'s by clicking on them, the same for changing rooms.     you only get one guess and one vote per game/abbreviation. this is still a work in progress so excuse any bugs you find as well as the css. Have fun.. oh yeah.. NO PROFANITY FILTER!!');
+
+
+
+    });
   //  $('#rooms').hide();
   //  $('#rooms').slideDown(1000);
     var voted = false;
