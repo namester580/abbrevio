@@ -232,7 +232,7 @@ io.on('connect',function(socket){
         }else{
 
             io.sockets.in(socket.room).emit('rooms',rooms);
-            io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
+            //io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
             io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
 
 
