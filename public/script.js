@@ -34,11 +34,14 @@ alert('already taken try again');
     socket.emit('newPlayer',prompt('enter a username'));
 });
 
+    socket.on('winner',function(latest){
+     //alert(latest);
+        $('#latestwinners').prepend('<li>' + latest  + '</li>');
 
-socket.on('invalidname',function(){
-alert('invalid try again');
-    socket.emit('newPlayer',prompt('enter a username'));
-});
+
+
+    });
+
 
 
     socket.on('roomfull',function(){
@@ -134,6 +137,7 @@ if(guess!=''){
 
                     function(event) {
                         $('#m').focus();
+                        console.log('id'+event.target.id);
                         //   alert( players[e].name);
                         if(voted==false) {
                             vote(event.target.id);
@@ -172,7 +176,7 @@ if(guess!=''){
         hAbbrevio.text(abbrevio);
         if(abbrevio != 'ABBREVIO'){
             $('#msgs li').remove();
-
+            $('#players').show();
             //   alert('k');
             //$('#rooms li').remove();
             // $('#players li').remove();
@@ -180,7 +184,7 @@ if(guess!=''){
         }
         if(abbrevio == 'ABBREVIO'){
             $('#players li').remove();
-
+            $('#players').hide();
 
 
         }

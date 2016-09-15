@@ -71,29 +71,21 @@ startGame('smallroom');
 
 io.on('connect',function(socket){
     console.log("client connected:");
-    if(!socket.room){
-        socket.room = 'lobby';
-        socket.join(socket.room);
-    }
+
 //socket.room = 'lobby';
 //    io.emit('rooms',rooms);
-    io.sockets.in(socket.room).emit('rooms',rooms);
-    io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
-    io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
-
+   socket.emit('rooms',rooms);
 
 
     socket.on('disconnect',function(){
         console.log(socket.id + "disconnected");
-       if(socket.room== 'lobby')
         io.sockets.in(socket.room).emit('chat',' just left',socket.name);
         socket.leave(socket.room);
         removePlayer(socket.name,socket.room);
         io.sockets.in(socket.room).emit('rooms',rooms);
         io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
-        io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
 
-
+console.log(players);
 
     });
 
@@ -113,11 +105,14 @@ io.on('connect',function(socket){
         //socket.room = 'lobby';
         //socket.join('lobby');
         //create player obj
-        if(name!=''){
+
             if(!nameExists(name)){
                 addPlayer(name,'lobby');
                 socket.name = name;
-                
+
+                    socket.room = 'lobby';
+                    socket.join(socket.room);
+
 //addPlayer(socket.name, socket.room);
                // socket.join('lobby');
                 players.push({
@@ -132,7 +127,7 @@ io.on('connect',function(socket){
 
                 io.sockets.in(socket.room).emit('rooms',rooms);
                 io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
-                io.sockets.in(socket.room).emit('abbrevio',getAbbrevio(socket.room));
+                socket.emit('abbrevio',getAbbrevio(socket.room));
 
 
 
@@ -144,12 +139,8 @@ io.on('connect',function(socket){
                 console.log('error nametaken');
 
             }
-        }//----------------
-        else{
-            socket.emit('invalidname');
+        //----------------
 
-
-        }
 
 
 
@@ -473,18 +464,22 @@ function getScore(room){
 function endGame(room){
     var winner = '';
     var winnerscore = 0;
+    var winansw = '';
+    var abr = getAbbrevio(room);
+    console.log(getAbbrevio(room));
     var plrs = getPlayersFor(room)
 for(var w in plrs ){
 if (plrs[w].score > winnerscore){
     winner = plrs[w].name;
+    winansw= plrs[w].guess;
     winnerscore = plrs[w].score;
 
 }
 
 
 }
-
-
+io.emit('winner',winner+ ' : ' + abr +'->' +winansw);
+console.log(winner+ ' : ' +winansw);
 io.sockets.in(room).emit('endGame',winner);
 startGame(room);
 
