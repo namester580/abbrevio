@@ -18,12 +18,23 @@ $(document).ready(function(){
 
 
 
+    function askname()
+    {
+        var nme = prompt('enter a username');
+        if (nme.length > 3) {
+            socket.emit('newPlayer', nme);
+        }
+        else {
+            alert('cant be less than 3');
+            askname();
+        }
 
+    }
 
     socket.on('connect',function(){
         voted = false; //=======================================
         guessed = false;
-        socket.emit('newPlayer',prompt('enter a username'));
+       askname();
 //guessed = false;
         $('#m').focus();
 
@@ -54,7 +65,7 @@ alert('already taken try again');
 //.. global
     socket.on('endGame',function(winner){
 
-        alert('winner is:' + winner);
+        alert('winner is : ' + winner);
 
 
 
@@ -137,7 +148,7 @@ if(guess!=''){
 
                     function(event) {
                         $('#m').focus();
-                        console.log('id'+event.target.id);
+
                         //   alert( players[e].name);
                         if(voted==false) {
                             vote(event.target.id);

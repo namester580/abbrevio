@@ -12,7 +12,7 @@ var clients=0;
 var rooms = [{
     name: 'lobby',
     abbrevio:'ABBREVIO',
-    maxPlayers:50,
+    maxPlayers:10,
     players:0
 
 
@@ -22,7 +22,7 @@ var rooms = [{
         name: 'notlobby',
         abbrevio:'',
 
-        maxPlayers:50,
+        maxPlayers:10,
         players:0
 
 
@@ -33,7 +33,7 @@ var rooms = [{
         name: 'someRoom',
         abbrevio:'',
 
-        maxPlayers:50,
+        maxPlayers:10,
         players:0
 
 
@@ -41,7 +41,7 @@ var rooms = [{
     },{
         name:'smallroom',
         abbrevio:'',
-        maxPlayers:8,
+        maxPlayers:4,
         players:0
 
 
@@ -70,7 +70,7 @@ startGame('smallroom');
 
 
 io.on('connect',function(socket){
-    console.log("client connected:");
+ //   console.log("client connected:");
 
 //socket.room = 'lobby';
 //    io.emit('rooms',rooms);
@@ -78,14 +78,14 @@ io.on('connect',function(socket){
 
 
     socket.on('disconnect',function(){
-        console.log(socket.id + "disconnected");
+ //       console.log(socket.id + "disconnected");
         io.sockets.in(socket.room).emit('chat',' just left',socket.name);
         socket.leave(socket.room);
         removePlayer(socket.name,socket.room);
         io.sockets.in(socket.room).emit('rooms',rooms);
         io.sockets.in(socket.room).emit('players',getPlayersFor(socket.room));
 
-console.log(players);
+//console.log(players);
 
     });
 
@@ -132,11 +132,11 @@ io.on('connect',function(socket){
 
 
 
-                console.log('player: ' + name + ' joined the lobby' );
+               // console.log('player: ' + name + ' joined the lobby' );
                 io.sockets.in(socket.room).emit('chat',' just joined',socket.name);
             }else{
                 socket.emit('nametaken');
-                console.log('error nametaken');
+     //           console.log('error nametaken');
 
             }
         //----------------
@@ -165,10 +165,10 @@ socket.on('room',function(room){
             socket.leave(socket.room);
             // removePlayer(socket.name,socket.room);
             clearPlayer(socket.name);
-            console.log(socket.name + " left " + socket.room);
+   //         console.log(socket.name + " left " + socket.room);
             lessPlayer(socket.room);
             socket.room = room;
-            console.log(socket.name + " joined " + socket.room);
+     //       console.log(socket.name + " joined " + socket.room);
 
             addPlayer(socket.name, socket.room);
             //   changeRoom(socket.name,socket.room);
@@ -466,7 +466,7 @@ function endGame(room){
     var winnerscore = 0;
     var winansw = '';
     var abr = getAbbrevio(room);
-    console.log(getAbbrevio(room));
+ //   console.log(getAbbrevio(room));
     var plrs = getPlayersFor(room)
 for(var w in plrs ){
 if (plrs[w].score > winnerscore){
@@ -479,7 +479,7 @@ if (plrs[w].score > winnerscore){
 
 }
 io.emit('winner',winner+ ' : ' + abr +'->' +winansw);
-console.log(winner+ ' : ' +winansw);
+//console.log(winner+ ' : ' +winansw);
 io.sockets.in(room).emit('endGame',winner);
 startGame(room);
 
@@ -520,6 +520,6 @@ function removePlayer(player,room){
 
 
 http.listen(process.env.PORT ||5000,function(){
-   console.log('listenning on port 5000');
+ //  console.log('listenning on port 5000');
 
 });
