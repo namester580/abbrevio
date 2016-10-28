@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" >
+    <meta charset="UTF-8">
+    
+    <title>ABBREVIO</title>
+</head>
+<body>
+
+    <header>
+        <h1 id = "abbrevio"> </h1>
+    </header>
+
+    <section>
+        <table id = 'rooms'>
+    <tr>
+       <th id = 'roomsheader' colspan = "4">Rooms</th>
+    </tr>
+        <tr>
+            <th>name</th>
+            <th>abbrevio</th>
+            <th>players</th>
+            <th>max</th>
+        </tr>
+
+        </table>
+    </section>
+
+    <section id="pmSection">
+        
+            <ul id="players"></ul>
+            <ul id="msgs"></ul>
+            
+    </section>
+
+<footer>
+    <form action="">
+        <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+</footer>
+
+
+</body>
+</html>
